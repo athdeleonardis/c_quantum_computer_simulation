@@ -13,7 +13,8 @@ xiym *xiym_tensor_prod(xiym *a, xiym *b);
 xiym xiym_identity(int length);
 
 struct xiym {
-    int length;
+    int cols;
+    int rows;
     xiy *values;
     xiym_getter getter;
 };
