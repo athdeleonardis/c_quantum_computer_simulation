@@ -25,6 +25,21 @@ void xiym_mul_i(xiym *a, xiym *b, xiym *out) {
     }
 }
 
+void xiym_tensor_prod_i(xiym *a, xiym *b, xiym *out) {
+    // out->cols = a->cols * b->cols
+    // out->rows = a->rows * b->rows
+    int ocols = a->cols * b->cols;
+    int orows = a->cols * b->cols;
+    for (int row = 0; row < orows; row++) {
+        for (int col = 0; col < ocols; col++) {
+            xiy aval = xiym_get(a, col/b->cols, row/b->rows);
+            xiy bval = xiym_get(b, col%b->cols, row%b->rows);
+            xiy oval = xiy_mul(aval, bval);
+            xiym_set(out, oval, col, row);
+        }
+    }
+}
+
 xiym xiym_identity(int n) {
     xiym In = { n, n, 0, xiy_matrix_getter_identity };
     return In;
