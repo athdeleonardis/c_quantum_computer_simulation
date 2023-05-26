@@ -7,6 +7,7 @@ xiy xiy_mul(xiy a, xiy b);
 xiy xiy_add(xiy a, xiy b);
 double xiy_len(xiy c);
 xiy xiy_mul_s(xiy a, double c);
+void xiy_print(xiy c);
 
 struct xiy {
     double x;

@@ -1,8 +1,11 @@
 #include <math.h>
+#include <stdio.h>
 #include "complex_matrices.h"
 
 void xiym_set(xiym *m, xiy c, int x, int y) {
-    m->values[m->cols*y + x] = c;
+    int i = m->cols*y + x;
+    m->values[i].x = c.x;
+    m->values[i].y = c.y;
 }
 
 xiy xiym_get(xiym *m, int x, int y) {
@@ -37,6 +40,17 @@ void xiym_tensor_prod_i(xiym *a, xiym *b, xiym *out) {
             xiy oval = xiy_mul(aval, bval);
             xiym_set(out, oval, col, row);
         }
+    }
+}
+
+void xiym_print(xiym *m) {
+    printf("xiym:\n");
+    for (int i = 0; i < m->rows; i++) {
+        for (int j = 0; j < m->cols; j++) {
+            xiy_print(xiym_get(m, j, i));
+            printf(" ");
+        }
+        printf("\n");
     }
 }
 

@@ -11,6 +11,7 @@ xiy xiym_get(xiym *m, int x, int y);
 void xiym_mul_i(xiym *a, xiym *b, xiym *out);
 void xiym_tensor_prod_i(xiym *a, xiym *b, xiym *out);
 xiym xiym_identity(int length);
+void xiym_print(xiym *m);
 
 struct xiym {
     int cols;

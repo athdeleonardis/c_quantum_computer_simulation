@@ -2,21 +2,6 @@
 #include "../complex_numbers.h"
 #include "../complex_matrices.h"
 
-void xiy_print(xiy c) {
-    printf("xiy: %f %f", c.x, c.y);
-}
-
-void xiym_print(xiym *m) {
-    printf("xiym:\n");
-    for (int i = 0; i < m->rows; i++) {
-        for (int j = 0; j < m->cols; j++) {
-            xiy_print(xiym_get(m, j, i));
-            printf(" ");
-        }
-        printf("\n");
-    }
-}
-
 int main(int argc, char *argv[]) {
     printf("Complex numbers:\n");
     xiy i = { 0, 1 };
