@@ -21,8 +21,11 @@ int main(int argc, char *argv[]) {
     xiy res[] = { xiy_zero, xiy_zero, xiy_zero, xiy_zero };
     xiym fin = { 2, 2, res, xiym_getter_default };
     xiym_mul_i(&id2x2, &X2x2, &fin);
+    printf("I2:\n");
     xiym_print(&id2x2);
+    printf("X2\n");
     xiym_print(&X2x2);
+    printf("I2 x X2\n");
     xiym_print(&fin);
 
     printf("Complex matrix tensor product:\n");
@@ -30,7 +33,9 @@ int main(int argc, char *argv[]) {
     xiy res0[36];
     xiym fin0 = { 6, 6, res0, xiym_getter_default };
     xiym_tensor_prod_i(&id3x3, &X2x2, &fin0);
+    printf("I3 (x) X2\n");
     xiym_print(&fin0);
     xiym_tensor_prod_i(&X2x2, &id3x3, &fin0);
+    printf("X2 (x) I3\n");
     xiym_print(&fin0);
 }
