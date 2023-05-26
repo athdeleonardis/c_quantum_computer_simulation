@@ -41,15 +41,15 @@ void xiym_tensor_prod_i(xiym *a, xiym *b, xiym *out) {
 }
 
 xiym xiym_identity(int n) {
-    xiym In = { n, n, 0, xiy_matrix_getter_identity };
+    xiym In = { n, n, 0, xiym_getter_identity };
     return In;
 }
 
-xiy xiy_matrix_getter_default(xiym *m, int x, int y) {
+xiy xiym_getter_default(xiym *m, int x, int y) {
     return m->values[y*m->cols + x];
 }
 
-xiy xiy_matrix_getter_identity(xiym *m, int x, int y) {
+xiy xiym_getter_identity(xiym *m, int x, int y) {
     xiy e = { x == y, 0 };
     return e;
 }

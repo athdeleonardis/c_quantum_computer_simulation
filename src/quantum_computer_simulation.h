@@ -2,20 +2,16 @@
 #define QUANTUM_COMPUTER_SIMULATION
 
 #include "complex_matrices.h"
+#include "qubits.h"
 
 typedef struct qubit_array qubit_array;
 typedef struct qubit_graph qubit_graph;
-typedef void (*quantum_gate)(int num_inputs, int *inputs, qubit_array* in, qubit_array *out);
+typedef void (*quantum_gate)(int num_inputs, int *inputs, qubits* in, qubits *out);
 typedef struct quantum_circuit quantum_circuit;
 
 void quantum_circuit_append(const char *name, int *qubits);
-void quantum_circuit_evaluate(quantum_circuit *qc, qubit_array *in, qubit_array *out);
-void quantum_circuit_simulate(quantum_circuit *qc, qubit_array *in, qubit_array *out, double noise);
-
-struct qubit_array {
-    int n;
-    xiym *vals;
-};
+void quantum_circuit_evaluate(quantum_circuit *qc, qubits *in, qubits *out);
+void quantum_circuit_simulate(quantum_circuit *qc, qubits *in, qubits *out, double noise);
 
 struct quantum_circuit {
     int num_inputs;

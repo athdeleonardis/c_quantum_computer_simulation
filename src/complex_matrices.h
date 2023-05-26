@@ -19,7 +19,7 @@ struct xiym {
     xiym_getter getter;
 };
 
-xiy xiy_matrix_getter_default(xiym *m, int x, int y);
-xiy xiy_matrix_getter_identity(xiym *m, int x, int y);
+xiy xiym_getter_default(xiym *m, int x, int y);
+xiy xiym_getter_identity(xiym *m, int x, int y);
 
 #endif
