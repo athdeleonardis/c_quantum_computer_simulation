@@ -37,8 +37,8 @@ void qc_name_map_put(qc_name_map *map, char *name, qucircuit qc) {
 
 void qc_name_map_delete(qc_name_map *map) {
     qc_name_node *nn = map->name_list_start;
-    qc_name_node *nnnext;
 
+    qc_name_node *nnnext;
     while (nn) {
         nnnext = nn->next;
         qc_free(nn->qc);
@@ -86,6 +86,7 @@ void qc_deep_copy(qucircuit *in, qucircuit *out, int copy_inputs) {
 
 void name_list_append(qc_name_map *map, char *name, qucircuit *qc) {
     qc_name_node *node = (qc_name_node *)malloc(sizeof(qc_name_node));
+    node->next = NULL;
     strcpy(node->name, name);
     node->qc = qc;
 

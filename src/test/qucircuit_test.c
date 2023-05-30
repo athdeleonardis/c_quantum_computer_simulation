@@ -7,6 +7,8 @@ qc_name_map create_simple_map();
 
 int main(int argc, char *argv[]) {
     qc_name_map map = create_simple_map();
+
+    qc_name_map_delete(&map);
 }
 
 qc_name_map create_simple_map() {
