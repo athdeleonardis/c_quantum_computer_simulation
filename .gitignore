@@ -2,3 +2,6 @@
 obj/
 out/
 *.swp
+*.save
+*.cc
+*.hh
