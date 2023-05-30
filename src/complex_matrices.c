@@ -1,5 +1,6 @@
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "complex_matrices.h"
 
 void xiym_set(xiym *m, xiy c, int x, int y) {
@@ -52,6 +53,12 @@ void xiym_print(xiym *m) {
         }
         printf("\n");
     }
+}
+
+void xiym_free(xiym *m) {
+    if (m->values)
+        free(m->values);
+    free(m);
 }
 
 xiym xiym_identity(int n) {

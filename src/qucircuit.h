@@ -12,6 +12,8 @@
 typedef struct qucircuit qucircuit;
 typedef xiym *(*xiym_compiler)(int num_inputs, int *input_list, int num_qubits);
 
+void qucircuit_free(qucircuit *q);
+
 struct qucircuit {
     int num_inputs;
     int *input_qubits;

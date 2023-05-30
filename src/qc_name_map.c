@@ -8,6 +8,7 @@
 
 void qc_deep_copy(qucircuit *in, qucircuit *out, int copy_inputs);
 void name_list_append(qc_name_map *map, char *name, qucircuit *qc);
+qucircuit *qc_name_map_find(qc_name_map *map, char *name);
 void qc_free(qucircuit *qc);
 
 //
@@ -35,13 +36,22 @@ void qc_name_map_put(qc_name_map *map, char *name, qucircuit qc) {
     name_list_append(map, name, deep_copy);
 }
 
+qucircuit *qc_name_map_get(qc_name_map *map, char *name) {
+    qucircuit *qc = qc_name_map_find(map, name);
+    if (!qc)
+        return NULL;
+    qucircuit *out = (qucircuit *)malloc(sizeof(qucircuit));
+    qc_deep_copy(qc, out, 0);
+    return out;
+}
+
 void qc_name_map_delete(qc_name_map *map) {
     qc_name_node *nn = map->name_list_start;
 
     qc_name_node *nnnext;
     while (nn) {
         nnnext = nn->next;
-        qc_free(nn->qc);
+        qucircuit_free(nn->qc);
         free(nn);
         nn = nnnext;
     }
@@ -97,11 +107,12 @@ void name_list_append(qc_name_map *map, char *name, qucircuit *qc) {
     map->name_list_end = node;
 }
 
-void qc_free(qucircuit *qc) {
-    if (qc->type == QC_TYPE_SEQUENTIAL) {
-        for (int i = 0; i < qc->subcircuits.num; i++) {
-            qc_free(qc->subcircuits.subcircuit+i);
-        }
+qucircuit *qc_name_map_find(qc_name_map *map, char *name) {
+    qc_name_node *nn = map->name_list_start;
+    while (nn) {
+        if (strcmp(nn->name, name) == 0)
+            return nn->qc;
+        nn = nn->next;
     }
-    free(qc);
+    return NULL;
 }
