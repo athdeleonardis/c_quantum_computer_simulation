@@ -9,6 +9,7 @@ typedef void (*qugate)(int num_inputs, int *inputs, qubits* in, qubits *out);
 void qugate_q0x(int, int *input, qubits *in, qubits *out);
 void qugate_q0y(int, int *input, qubits *in, qubits *out);
 void qugate_q0z(int, int *input, qubits *in, qubits *out);
+void qugate_q0h(int, int *input, qubits *in, qubits *out);
 // Assume first qubit is control, second is target
 void qugate_q01cnot(int, int *inputs, qubits *in, qubits *out);
 

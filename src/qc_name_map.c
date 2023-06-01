@@ -36,12 +36,12 @@ void qc_name_map_put(qc_name_map *map, char *name, qucircuit qc) {
     name_list_append(map, name, deep_copy);
 }
 
-qucircuit *qc_name_map_get(qc_name_map *map, char *name) {
+qucircuit qc_name_map_get(qc_name_map *map, char *name) {
     qucircuit *qc = qc_name_map_find(map, name);
-    if (!qc)
-        return NULL;
-    qucircuit *out = (qucircuit *)malloc(sizeof(qucircuit));
-    qc_deep_copy(qc, out, 0);
+    // qc == NULL -> problem
+
+    qucircuit out;
+    qc_deep_copy(qc, &out, 0);
     return out;
 }
 

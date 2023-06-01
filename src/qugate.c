@@ -1,3 +1,4 @@
+#include <math.h>
 #include "complex_numbers.h"
 #include "complex_matrices.h"
 #include "qubits.h"
@@ -23,6 +24,18 @@ void qugate_q0z(int n, int *input, qubits *in, qubits *out) {
     for (int i = 0; i < in->vals.rows; i++) {
         double c = 1-2*(1%2);
         xiym_set(&out->vals, xiy_mul_s(xiym_get(&in->vals, 0, i), c), 0, i);
+    }
+}
+
+void qugate_q0h(int n, int *input, qubits *in, qubits *out) {
+    double c = 1/sqrt(2);
+    for (int i = 0; i < in->vals.rows; i++) {
+        int map = 1-2*(i%2); // 1, -1, 1, -1...
+        xiy val1 = xiym_get(&in->vals, 0, i);
+        val1 = xiy_mul_s(val1, -1*map);
+        xiy val2 = xiym_get(&in->vals, 0, i+map);
+        xiy val = xiy_mul_s(xiy_add(val1, val2), c);
+        xiym_set(&out->vals, val, 0, i);
     }
 }
 

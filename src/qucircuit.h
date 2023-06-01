@@ -12,14 +12,20 @@
 typedef struct qucircuit qucircuit;
 typedef xiym *(*xiym_compiler)(int num_inputs, int *input_list, int num_qubits);
 
-void qucircuit_free(qucircuit *q);
+void qucircuit_free(qucircuit *qc);
+qucircuit *qucircuit_alloc(int num_qubits, int type, int input_is_fixed);
+void qucircuit_set_inputs(qucircuit *qc, int *input_qubits);
+void qucircuit_alloc_sequential(qucircuit *qc, int num_subcircuits);
+// Calculate all input_indices and compiled.matrix
+void qucircuit_compile(qucircuit *qc);
+void qucircuit_print(qucircuit *qc);
 
 struct qucircuit {
     int num_inputs;
-    int *input_qubits;
-    int *input_indices;
     int type;
     int input_is_fixed;
+    int *input_qubits;
+    int *input_indices;
     union {
         xiym *matrix;
         qugate gate;
