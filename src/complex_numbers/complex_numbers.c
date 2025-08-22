@@ -1,13 +1,13 @@
 #include <math.h>
 #include <stdio.h>
-#include "complex_numbers.h"
+#include "./complex_numbers.h"
 
 const xiy xiy_one = { 1, 0 };
 const xiy xiy_zero = { 0, 0 };
 const xiy xiy_i = { 0, 1 };
 
 xiy xiy_from_angle(COMPLEX_NUMBERS_PRECISION theta) {
-    xiy z = { cos(theta), sin(theta) };
+    xiy z = { .x=cos(theta), .y=sin(theta) };
     return z;
 }
 
