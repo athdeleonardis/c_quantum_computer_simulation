@@ -2,6 +2,13 @@
 #include <math.h>
 #include "./qugate.h"
 
+void qugate_i(xiy *mat_2x2) {
+    mat_2x2[0] = xiy_one;
+    mat_2x2[1] = xiy_zero;
+    mat_2x2[2] = xiy_zero;
+    mat_2x2[3] = xiy_one;
+}
+
 void qugate_x(xiy *mat_2x2) {
     mat_2x2[0] = xiy_zero;
     mat_2x2[1] = xiy_one;

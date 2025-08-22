@@ -4,6 +4,13 @@
 #include "../complex_numbers/complex_numbers.h"
 
 /**
+ * @brief Initializes the input matrix to be the 'Identity' gate.
+ * 
+ * @param mat_2x2 The 2x2 matrix to have its values initialized.
+ */
+void qugate_i(xiy *mat_2x2);
+
+/**
  * @brief Initializes the input matrix to be the 'Pauli X' gate. AKA 'Not' gate.
  * 
  * @param mat_2x2 The 2x2 matrix to have its values initialized.
