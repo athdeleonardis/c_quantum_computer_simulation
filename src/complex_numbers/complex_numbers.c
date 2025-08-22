@@ -6,6 +6,11 @@ const xiy xiy_one = { 1, 0 };
 const xiy xiy_zero = { 0, 0 };
 const xiy xiy_i = { 0, 1 };
 
+xiy xiy_from_angle(COMPLEX_NUMBERS_PRECISION theta) {
+    xiy z = { cos(theta), sin(theta) };
+    return z;
+}
+
 xiy xiy_mul(xiy a, xiy b) {
     xiy c = { a.x * b.x - a.y * b.y, a.x * b.y + a.y * b.x };
     return c;
@@ -16,15 +21,15 @@ xiy xiy_add(xiy a, xiy b) {
     return c;
 }
 
-double xiy_len(xiy c) {
-    return sqrt(c.x * c.x + c.y * c.y);
+xiy xiy_mul_s(xiy z, COMPLEX_NUMBERS_PRECISION c) {
+    xiy w = { z.x * c, z.y * c };
+    return w;
 }
 
-xiy xiy_mul_s(xiy a, double c) {
-    xiy b = { a.x * c, b.x * c };
-    return b;
+COMPLEX_NUMBERS_PRECISION xiy_len(xiy z) {
+    return sqrt(z.x * z.x + z.y * z.y);
 }
 
-void xiy_print(xiy c) {
-    printf("xiy: %f %f", c.x, c.y);
+void xiy_print(xiy z) {
+    printf("xiy: %f %f", z.x, z.y);
 }
