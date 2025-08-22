@@ -115,5 +115,5 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    printf("TEST -- complex_numbers -- SUCCESS");
+    printf("TEST -- complex_numbers -- SUCCESS\n");
 }
