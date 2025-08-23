@@ -19,13 +19,15 @@ qucircuit_context qucircuit_context_init(int n_qubits, int *stack);
 /**
  * @brief Returns a new qucontext, with N qubits, putting the remapped inputs onto the input to qubit mapping stack.
  * 
- * Example 1: qc = [0,1,2,3,4], inputs = [1,2], qcn = [1,2].
+ * Example 1: qcc = [0,1,2,3,4], inputs = [1,2], qccn = [1,2].
  * 
- * Example 2: qc = [1,4,7,10,12], inputs = [1,2,4], qcn = [4,7,12].
+ * Example 2: qcc = [1,4,7,10,12], inputs = [1,2,4], qccn = [4,7,12].
  * 
  * @param qcc The qucircuit context to remap via the given inputs.
  * @param n_inputs The number of qubits to remap.
  * @param inputs The qubits to remap.
+ * 
+ * @returns The new context with mapping from input to qubit.
  */
 qucircuit_context qucircuit_context_push(qucircuit_context *qcc, int n_inputs, int *inputs);
 
