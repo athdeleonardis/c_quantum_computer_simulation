@@ -7,7 +7,7 @@ void qubits_apply_2x2(qubits *qs, xiy *mat_2x2, int q) {
      * ( w1n )   ( z21 z22 )( w1 )   ( z21*w0 + z22*w1 )   ( w1n1 + w1n2 )
      */
     int q_set_1 = 1 << q;
-    int q_set_0 = !q_set_1;
+    int q_set_0 = ~q_set_1;
 
     for (int s = 0; s < qs->n_values; s++) {
         // Whether qubit q is 0 or 1, qv = !!(s & q_set_1)
@@ -31,9 +31,9 @@ void qubits_apply_4x4(qubits *qs, xiy *mat_4x4, int q1, int q2) {
      * ( w11n )   ( z41 z42 z43 z44 )( w11 )   ( z41*w00 + z42*w01 + z43*w10 + z44*w11 )   ( w11n1 + w11n2 + w11n3 + w11n4 )
      */
     int q1_set_1 = 1 << q1;
-    int q1_set_0 = !q1_set_1;
+    int q1_set_0 = ~q1_set_1;
     int q2_set_1 = 1 << q2;
-    int q2_set_0 = !q2_set_1;
+    int q2_set_0 = ~q2_set_1;
 
     for (int s = 0; s < qs->n_values; s++) {
         // Whether qubit q is 0 or 1, qv = !!(s & q_set_1)

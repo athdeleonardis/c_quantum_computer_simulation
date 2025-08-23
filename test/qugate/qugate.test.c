@@ -27,6 +27,19 @@ int main(int argc, char *argv[]) {
     xiy mat_z[4] = { xiy_one, xiy_zero, xiy_zero, xiy_mul_s(xiy_one, -1) };
     xiy mat_h[4] = { inv_sqrt2, inv_sqrt2, inv_sqrt2, xiy_mul_s(inv_sqrt2, -1) };
 
+    xiy mat_cx[16] = {
+        xiy_one, xiy_zero, xiy_zero, xiy_zero,
+        xiy_zero, xiy_one, xiy_zero, xiy_zero,
+        xiy_zero, xiy_zero, xiy_zero, xiy_one,
+        xiy_zero, xiy_zero, xiy_one, xiy_zero
+    };
+    xiy mat_cz[16] = {
+        xiy_one, xiy_zero, xiy_zero, xiy_zero,
+        xiy_zero, xiy_one, xiy_zero, xiy_zero,
+        xiy_zero, xiy_zero, xiy_one, xiy_zero,
+        xiy_zero, xiy_zero, xiy_zero, xiy_mul_s(xiy_one, -1)
+    };
+
     xiy *mat_2x2s[5] = {
         mat_i,
         mat_x,
