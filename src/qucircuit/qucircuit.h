@@ -53,7 +53,8 @@ void qucircuit_init_4x4(qucircuit *circuit, char *name, xiy *mat_4x4);
  * 
  * @param circuit The parent qucircuit to initialize.
  * @param name The name to give the parent qucircuit.
- * @param n_inputs The number of input qubits the qucircuit takes.
+ * @param n_inputs The number of input qubits the parent qucircuit takes.
+ * @param n_children The number of children the parent qucircuit has.
  * @param children The child qucircuit applications for the parent qucircuit to apply.
  */
 void qucircuit_init_parent(qucircuit *circuit, char *name, int n_inputs, int n_children, qucircuit_application *children);
