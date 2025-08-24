@@ -8,6 +8,7 @@
 #define N_QUBITS 3
 #define N_VALUES 8
 #define N_2X2_TESTS 8
+#define N_4X4_TESTS 4
 
 typedef struct test_2x2 {
     xiy *mat;
@@ -17,9 +18,9 @@ typedef struct test_2x2 {
 
 typedef struct test_4x4 {
     xiy *mat;
-    xiy *output[4];
     int q1;
     int q2;
+    xiy *output;
 } test_4x4;
 
 void copy_state(qubits *qs, xiy *state) {
@@ -52,6 +53,21 @@ void xiy_print_2x2(xiy *mat) {
     printf("Matrix:\n");
     printf("{{%lf,%lf},{%lf,%lf},\n", mat[0].x, mat[0].y, mat[1].x, mat[1].y);
     printf(" {%lf,%lf},{%lf,%lf}}\n", mat[2].x, mat[2].y, mat[3].x, mat[3].y);
+}
+
+void xiy_print_4x4(xiy *mat) {
+    printf("Matrix:\n");
+    for (int i = 0; i < 16; i += 4) {
+        if (i == 0)
+            printf("{");
+        else
+            printf(" ");
+        printf("{%lf,%lf},{%lf,%lf},{%lf,%lf},{%lf,%lf}", mat[i+0].x, mat[i+0].y, mat[i+1].x, mat[i+1].y, mat[i+2].x, mat[i+2].y, mat[i+3].x, mat[i+3].y);
+        if (i == 12)
+            printf("}\n");
+        else
+            printf(",\n");
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -146,7 +162,27 @@ int main(int argc, char *argv[]) {
     //  000   001  -010  -011   100   101  -110  -111
     //   1     2    -3    -4     5     6    -7    -8
     xiy state_z_1[N_VALUES] = { c1, c2, c3m, c4m, c5, c6, c7m, c8m };
-
+    // mat_cx flips q1 if q0 is 1
+    // q0=0 q1=1
+    //  000   001   010   011   100   101   110   111
+    //  000   011   010   001   100   111   110   101
+    //   1     4     3     2     5     8     7     6
+    xiy state_cx_0_1[N_VALUES] = { c1, c4, c3, c2, c5, c8, c7, c6 };
+    // q0=1 q1=2
+    //  000   001   010   011   100   101   110   111
+    //  000   001   110   111   100   101   010   011
+    //   1     2     7     8     5     6     3     4
+    xiy state_cx_1_2[N_VALUES] = { c1, c2, c7, c8, c5, c6, c3, c4 };
+    // q0=2 q1=1
+    //  000   001   010   011   100   101   110   111
+    //  000   001   010   011   110   111   100   101
+    //   1     2     3     4     7     8     5     6
+    xiy state_cx_2_1[N_VALUES] = { c1, c2, c3, c4, c7, c8, c5, c6 };
+    // mat_cz if q0 and q1 are 1, multiplies by -1
+    //  000   001   010   011   100   101   110   111
+    //  000   001   010   011   100   101  -110  -111
+    //   1     2     3     4     5     6    -7    -8
+    xiy state_cz_2_1[N_VALUES] = { c1, c2, c3, c4, c5, c6, c7m, c8m };
 
     test_2x2 test_i_0 = { mat_i, 0, state_i };
     test_2x2 test_i_1 = { mat_i, 1, state_i };
@@ -157,15 +193,21 @@ int main(int argc, char *argv[]) {
     test_2x2 test_y_1 = { mat_y, 1, state_y_1 };
     test_2x2 test_z_1 = { mat_z, 1, state_z_1 };
 
+    test_4x4 test_cx_0_1 = { mat_cx, 0, 1, state_cx_0_1 };
+    test_4x4 test_cx_1_2 = { mat_cx, 1, 2, state_cx_1_2 };
+    test_4x4 test_cx_2_1 = { mat_cx, 2, 1, state_cx_2_1 };
+    test_4x4 test_cz_2_1 = { mat_cz, 2, 1, state_cz_2_1 };
+
     test_2x2 test_2x2s[N_2X2_TESTS] = {
-        test_i_0,
-        test_i_1,
-        test_i_2,
-        test_x_0,
-        test_x_1,
-        test_x_2,
+        test_i_0, test_i_1, test_i_2,
+        test_x_0, test_x_1, test_x_2,
         test_y_1,
         test_z_1
+    };
+
+    test_4x4 test_4x4s[N_4X4_TESTS] = {
+        test_cx_0_1, test_cx_1_2, test_cx_2_1,
+        test_cz_2_1
     };
 
     // Test apply 2x2
@@ -174,7 +216,7 @@ int main(int argc, char *argv[]) {
         copy_state(&qs, state_i);
         qubits_apply_2x2(&qs, test.mat, test.q);
         if (!check_state(&qs, test.output)) {
-            printf("TEST -- qubits_apply -- FAILED -- 2x2 %i: Expected state to match\n", i);
+            printf("TEST -- qubits_apply -- FAILED -- 2x2 %i: Expected result to match state\n", i);
             xiy_print_2x2(test.mat);
             print_state(&qs, test.output);
             exit(0);
@@ -182,6 +224,17 @@ int main(int argc, char *argv[]) {
     }
 
     // Test apply 4x4
+    for (int i = 0; i < N_4X4_TESTS; i++) {
+        test_4x4 test = test_4x4s[i];
+        copy_state(&qs, state_i);
+        qubits_apply_4x4(&qs, test.mat, test.q1, test.q2);
+        if (!check_state(&qs, test.output)) {
+            printf("TEST -- qubits_apply -- FAILED -- 4x4 %i: Expected result to match state\n", i);
+            xiy_print_4x4(test.mat);
+            print_state(&qs, test.output);
+            exit(0);
+        }
+    }
 
     printf("TEST -- qubits_apply -- SUCCESS\n");
 }
