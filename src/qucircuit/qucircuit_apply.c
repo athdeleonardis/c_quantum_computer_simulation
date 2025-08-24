@@ -11,13 +11,13 @@ void qucircuit_apply(qubits qs, qucircuit_context qcc, qucircuit_application *ap
 
     switch (application->circuit->type) {
         case QUCIRCUIT_TYPE_2X2: {
-            return qucircuit_apply_2x2(qs, qcc, application->circuit);
+            qucircuit_apply_2x2(qs, qcc, application->circuit);
         }
         case QUCIRCUIT_TYPE_4X4: {
-            return qucircuit_apply_4x4(qs, qcc, application->circuit);
+            qucircuit_apply_4x4(qs, qcc, application->circuit);
         }
         case QUCIRCUIT_TYPE_PARENT: {
-            return qucircuit_apply_parent(qs, qcc, application->circuit);
+            qucircuit_apply_parent(qs, qcc, application->circuit);
         }
     }
 }

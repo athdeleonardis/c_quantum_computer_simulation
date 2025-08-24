@@ -1,0 +1,4 @@
+target_sources(c_quantum_computer_simulation PRIVATE qucircuit.c)
+target_sources(c_quantum_computer_simulation PRIVATE qucircuit_context.c)
+target_sources(c_quantum_computer_simulation PRIVATE qucircuit_apply.c)
+target_include_directories(c_quantum_computer_simulation PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

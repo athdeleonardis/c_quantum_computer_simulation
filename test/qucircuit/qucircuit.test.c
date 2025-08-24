@@ -29,7 +29,7 @@ int main(int argc, char *argv) {
         exit(0);
     }
     qucircuit qc_4x4;
-    qc_init_4x4(&qc_4x4, POINTER_4X4_NAME, POINTER_4X4_MAT);
+    qucircuit_init_4x4(&qc_4x4, POINTER_4X4_NAME, POINTER_4X4_MAT);
     if (qc_4x4.type != QUCIRCUIT_TYPE_4X4) {
         printf("TEST -- qucircuit -- FAILED -- 4x4 type: Expected type=%i but got %i\n", QUCIRCUIT_TYPE_4X4, qc_4x4.type);
         exit(0);
@@ -66,7 +66,7 @@ int main(int argc, char *argv) {
         printf("TEST -- qucircuit -- FAILED -- parent name: Expected name=%i but got %i\n", POINTER_PARENT_NAME, qc_parent.name);
         exit(0);
     }
-    if (qc_parent.n_inputs != 2) {
+    if (qc_parent.n_inputs != PARENT_N_INPUTS) {
         printf("TEST -- qucircuit -- FAILED -- parent n_inputs: Expected n_inputs=%i but got %i\n", PARENT_N_INPUTS, qc_parent.n_inputs);
         exit(0);
     }

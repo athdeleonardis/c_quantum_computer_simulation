@@ -1,6 +1,6 @@
 .token
 obj/
-out/
+build/
 *.swp
 *.save
 *.cc

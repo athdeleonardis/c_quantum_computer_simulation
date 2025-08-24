@@ -1,0 +1,2 @@
+target_sources(c_quantum_computer_simulation PRIVATE complex_numbers.c)
+target_include_directories(c_quantum_computer_simulation PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

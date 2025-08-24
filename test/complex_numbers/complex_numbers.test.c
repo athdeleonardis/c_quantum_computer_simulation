@@ -10,7 +10,7 @@
 #define EPSILON 1e-9
 
 int xiy_equals(xiy a, xiy b) {
-    return labs(a.x-b.x) < EPSILON && labs(a.y-b.y) < EPSILON;
+    return fabs(a.x-b.x) < EPSILON && fabs(a.y-b.y) < EPSILON;
 }
 
 int sign(int x) {
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
                     xiy r_test = xiy_add(a, b);
                     
                     if (!xiy_equals(r, r_test)) {
-                        printf("TEST -- complex_numbers -- FAILED -- Addition: Expected {%lf,%lf}+{%lf,%lf}={%lf,%lf} but got {%lf,%lf}.\n", i, j, m, n, r.x, r.y, r_test.x, r_test.y);
+                        printf("TEST -- complex_numbers -- FAILED -- Addition: Expected {%i,%i}+{%i,%i}={%lf,%lf} but got {%lf,%lf}.\n", i, j, m, n, r.x, r.y, r_test.x, r_test.y);
                         exit(0);
                     }
                 }
@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
                     xiy r_test = xiy_mul(a, b);
                     
                     if (!xiy_equals(r, r_test)) {
-                        printf("TEST -- complex_numbers -- FAILED -- Multiplication: Expected {%lf,%lf}*{%lf,%lf}={%lf,%lf} but got {%lf,%lf}.\n", i, j, m, n, r.x, r.y, r_test.x, r_test.y);
+                        printf("TEST -- complex_numbers -- FAILED -- Multiplication: Expected {%i,%i}*{%i,%i}={%lf,%lf} but got {%lf,%lf}.\n", i, j, m, n, r.x, r.y, r_test.x, r_test.y);
                         exit(0);
                     }
                 }
@@ -94,7 +94,7 @@ int main(int argc, char *argv[]) {
                 xiy r_test = xiy_mul_s(z, k);
 
                 if (!xiy_equals(r, r_test)) {
-                    printf("TEST -- complex_numbers -- FAILED -- Multiplication by scalar: Expected {%lf,%lf}*%lf={%lf,%lf} but got {%lf,%lf}.\n", z.x, z.y, k, r.x, r.y, r_test.x, r_test.y);
+                    printf("TEST -- complex_numbers -- FAILED -- Multiplication by scalar: Expected {%lf,%lf}*%i={%lf,%lf} but got {%lf,%lf}.\n", z.x, z.y, k, r.x, r.y, r_test.x, r_test.y);
                     exit(0);
                 }
             }
@@ -110,7 +110,7 @@ int main(int argc, char *argv[]) {
         xiy r_test = xiy_from_angle(angle);
 
         if (!xiy_equals(r, r_test)) {
-            printf("TEST -- complex_numbers -- FAILED -- Angle initialization: Expected xiy_from_angle(%lf * pi / 2)={%lf,%lf} but got {%lf,%lf}.\n", i, r.x, r.y, r_test.x, r_test.y);
+            printf("TEST -- complex_numbers -- FAILED -- Angle initialization: Expected xiy_from_angle(%i * pi / 2)={%lf,%lf} but got {%lf,%lf}.\n", i, r.x, r.y, r_test.x, r_test.y);
             exit(0);
         }
     }

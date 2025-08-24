@@ -30,7 +30,7 @@ void copy_state(qubits *qs, xiy *state) {
 }
 
 int check_xiy(xiy a, xiy b) {
-    return labs(a.x - b.x) < EPSILON && labs(a.y - b.y) < EPSILON;
+    return fabs(a.x - b.x) < EPSILON && fabs(a.y - b.y) < EPSILON;
 }
 
 int check_state(qubits *qs, xiy *state) {

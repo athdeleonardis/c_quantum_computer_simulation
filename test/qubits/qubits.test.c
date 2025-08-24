@@ -21,31 +21,31 @@ int main(int argc, char *argv[]) {
         exit(0);
     }
     if (qs.values_in != TEST_POINTER_A) {
-        printf("TEST -- qubits -- FAILED -- values_in: Expected qs.values_in=%i but got %i.\n", TEST_POINTER_A, qs.values_in);
+        printf("TEST -- qubits -- FAILED -- values_in: Expected qs.values_in=%p but got %p.\n", (void *)TEST_POINTER_A, (void *)qs.values_in);
         exit(0);
     }
     if (qs.values_out != TEST_POINTER_B) {
-        printf("TEST -- qubits -- FAILED -- values_out: Expected qs.values_out=%i but got %i.\n", TEST_POINTER_B, qs.values_out);
+        printf("TEST -- qubits -- FAILED -- values_out: Expected qs.values_out=%p but got %p.\n", (void *)TEST_POINTER_B, (void *)qs.values_out);
         exit(0);
     }
     
     // Test swap
     qubits_swap_in_out(&qs);
     if (qs.values_in != TEST_POINTER_B) {
-        printf("TEST -- qubits -- FAILED -- values_in first swap: Expected qs.values_in=%i but got %i.\n", TEST_POINTER_B, qs.values_in);
+        printf("TEST -- qubits -- FAILED -- values_in first swap: Expected qs.values_in=%p but got %p.\n", (void *)TEST_POINTER_B, (void *)qs.values_in);
         exit(0);
     }
     if (qs.values_out != TEST_POINTER_A) {
-        printf("TEST -- qubits -- FAILED -- values_out first swap: Expected qs.values_out=%i but got %i.\n", TEST_POINTER_A, qs.values_out);
+        printf("TEST -- qubits -- FAILED -- values_out first swap: Expected qs.values_out=%p but got %p.\n", (void *)TEST_POINTER_A, (void *)qs.values_out);
         exit(0);
     }
     qubits_swap_in_out(&qs);
     if (qs.values_in != TEST_POINTER_A) {
-        printf("TEST -- qubits -- FAILED -- values_in second swap: Expected qs.values_in=%i but got %i.\n", TEST_POINTER_A, qs.values_in);
+        printf("TEST -- qubits -- FAILED -- values_in second swap: Expected qs.values_in=%p but got %p.\n", (void *)TEST_POINTER_A, (void *)qs.values_in);
         exit(0);
     }
     if (qs.values_out != TEST_POINTER_B) {
-        printf("TEST -- qubits -- FAILED -- values_out second swap: Expected qs.values_out=%i but got %i.\n", TEST_POINTER_B, qs.values_out);
+        printf("TEST -- qubits -- FAILED -- values_out second swap: Expected qs.values_out=%p but got %p.\n", (void *)TEST_POINTER_B, (void *)qs.values_out);
         exit(0);
     }
 
