@@ -1,2 +1,3 @@
 add_executable(complex_numbers.test complex_numbers.test.c)
 target_link_libraries(complex_numbers.test PRIVATE c_quantum_computer_simulation)
+add_test(NAME complex_numbers COMMAND complex_numbers.test)
