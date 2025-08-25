@@ -5,6 +5,6 @@
 #include "./qucircuit_context.h"
 #include "./qucircuit.h"
 
-void qucircuit_apply(qubits qs, qucircuit_context qcc, qucircuit_application *application);
+void qucircuit_apply(qubits *qs, qucircuit_context qcc, qucircuit_application *application);
 
 #endif
