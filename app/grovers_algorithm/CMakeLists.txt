@@ -1,0 +1,2 @@
+add_executable(grovers_algorithm.app main.c)
+target_link_libraries(grovers_algorithm.app PRIVATE c_quantum_computer_simulation)
