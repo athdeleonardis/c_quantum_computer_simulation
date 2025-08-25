@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
                 xiy_print_2x2(test.output);
                 printf("but got\n");
                 xiy_print_2x2(mat_input);
-                exit(0);
+                exit(1);
             }
         }
     }
@@ -129,7 +129,7 @@ int main(int argc, char *argv[]) {
                 xiy_print_4x4(test.output);
                 printf("but got\n");
                 xiy_print_4x4(mat_input);
-                exit(0);
+                exit(1);
             }
         };
     }

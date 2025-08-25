@@ -219,7 +219,7 @@ int main(int argc, char *argv[]) {
             printf("TEST -- qubits_apply -- FAILED -- 2x2 %i: Expected result to match state\n", i);
             xiy_print_2x2(test.mat);
             print_state(&qs, test.output);
-            exit(0);
+            exit(1);
         }
     }
 
@@ -232,7 +232,7 @@ int main(int argc, char *argv[]) {
             printf("TEST -- qubits_apply -- FAILED -- 4x4 %i: Expected result to match state\n", i);
             xiy_print_4x4(test.mat);
             print_state(&qs, test.output);
-            exit(0);
+            exit(1);
         }
     }
 

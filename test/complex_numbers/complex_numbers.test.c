@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
                     
                     if (!xiy_equals(r, r_test)) {
                         printf("TEST -- complex_numbers -- FAILED -- Addition: Expected {%i,%i}+{%i,%i}={%lf,%lf} but got {%lf,%lf}.\n", i, j, m, n, r.x, r.y, r_test.x, r_test.y);
-                        exit(0);
+                        exit(1);
                     }
                 }
             }
@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
 
         if (!xiy_equals(r, r_test)) {
             printf("TEST -- complex_numbers -- FAILED -- Multiplication of constants: Expected {%lf,%lf}*{%lf,%lf}={%lf,%lf} but got {%lf,%lf}.\n", a.x, a.y, b.x, b.y, r.x, r.y, r_test.x, r_test.y);
-            exit(0);
+            exit(1);
         }
     }
 
@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
                     
                     if (!xiy_equals(r, r_test)) {
                         printf("TEST -- complex_numbers -- FAILED -- Multiplication: Expected {%i,%i}*{%i,%i}={%lf,%lf} but got {%lf,%lf}.\n", i, j, m, n, r.x, r.y, r_test.x, r_test.y);
-                        exit(0);
+                        exit(1);
                     }
                 }
             }
@@ -95,7 +95,7 @@ int main(int argc, char *argv[]) {
 
                 if (!xiy_equals(r, r_test)) {
                     printf("TEST -- complex_numbers -- FAILED -- Multiplication by scalar: Expected {%lf,%lf}*%i={%lf,%lf} but got {%lf,%lf}.\n", z.x, z.y, k, r.x, r.y, r_test.x, r_test.y);
-                    exit(0);
+                    exit(1);
                 }
             }
         }
@@ -111,7 +111,7 @@ int main(int argc, char *argv[]) {
 
         if (!xiy_equals(r, r_test)) {
             printf("TEST -- complex_numbers -- FAILED -- Angle initialization: Expected xiy_from_angle(%i * pi / 2)={%lf,%lf} but got {%lf,%lf}.\n", i, r.x, r.y, r_test.x, r_test.y);
-            exit(0);
+            exit(1);
         }
     }
 

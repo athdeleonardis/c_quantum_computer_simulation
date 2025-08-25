@@ -14,39 +14,39 @@ int main(int argc, char *argv[]) {
     qubits_init(&qs, TEST_N_QUBITS, TEST_POINTER_A, TEST_POINTER_B);
     if (qs.n_qubits != TEST_N_QUBITS) {
         printf("TEST -- qubits -- FAILED -- n_qubits: Expected qs.n_qubits=%i but got %i.\n", TEST_N_QUBITS, qs.n_qubits);
-        exit(0);
+        exit(1);
     }
     if (qs.n_values != TEST_N_VALUES) {
         printf("TEST -- qubits -- FAILED -- n_values: Expected qs.n_values=%i but got %i.\n", TEST_N_VALUES, qs.n_values);
-        exit(0);
+        exit(1);
     }
     if (qs.values_in != TEST_POINTER_A) {
         printf("TEST -- qubits -- FAILED -- values_in: Expected qs.values_in=%p but got %p.\n", (void *)TEST_POINTER_A, (void *)qs.values_in);
-        exit(0);
+        exit(1);
     }
     if (qs.values_out != TEST_POINTER_B) {
         printf("TEST -- qubits -- FAILED -- values_out: Expected qs.values_out=%p but got %p.\n", (void *)TEST_POINTER_B, (void *)qs.values_out);
-        exit(0);
+        exit(1);
     }
     
     // Test swap
     qubits_swap_in_out(&qs);
     if (qs.values_in != TEST_POINTER_B) {
         printf("TEST -- qubits -- FAILED -- values_in first swap: Expected qs.values_in=%p but got %p.\n", (void *)TEST_POINTER_B, (void *)qs.values_in);
-        exit(0);
+        exit(1);
     }
     if (qs.values_out != TEST_POINTER_A) {
         printf("TEST -- qubits -- FAILED -- values_out first swap: Expected qs.values_out=%p but got %p.\n", (void *)TEST_POINTER_A, (void *)qs.values_out);
-        exit(0);
+        exit(1);
     }
     qubits_swap_in_out(&qs);
     if (qs.values_in != TEST_POINTER_A) {
         printf("TEST -- qubits -- FAILED -- values_in second swap: Expected qs.values_in=%p but got %p.\n", (void *)TEST_POINTER_A, (void *)qs.values_in);
-        exit(0);
+        exit(1);
     }
     if (qs.values_out != TEST_POINTER_B) {
         printf("TEST -- qubits -- FAILED -- values_out second swap: Expected qs.values_out=%p but got %p.\n", (void *)TEST_POINTER_B, (void *)qs.values_out);
-        exit(0);
+        exit(1);
     }
 
     printf("TEST -- qubits -- SUCCESS\n");
