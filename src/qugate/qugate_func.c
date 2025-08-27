@@ -149,7 +149,7 @@ void qugate_func_mx(qubits *qs, int n_targets, int *inputs) {
 
     int n_values = qs->n_values;
     for (int s = 0; s < n_values; s++) {
-        qs->values_out[s] = qs->values_out[s ^ flip];
+        qs->values_out[s] = qs->values_in[s ^ flip];
     }
 
     qubits_swap_in_out(qs);
