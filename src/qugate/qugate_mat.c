@@ -31,8 +31,7 @@ void qugate_mat_z(xiy *mat_2x2) {
 }
 
 void qugate_mat_h(xiy *mat_2x2) {
-    double c = 1/sqrt(2);
-    mat_2x2[0] = xiy_mul_s(xiy_one, c);
+    mat_2x2[0] = xiy_mul_s(xiy_one, M_SQRT1_2);
     mat_2x2[1] = mat_2x2[0];
     mat_2x2[2] = mat_2x2[0];
     mat_2x2[3] = xiy_mul_s(mat_2x2[0], -1);

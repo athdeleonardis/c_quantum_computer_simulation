@@ -9,8 +9,9 @@
 #define QUCIRCUIT_TYPE_PARENT 3
 #define QUCIRCUIT_TYPE_FUNC_U 4
 #define QUCIRCUIT_TYPE_FUNC_CU 5
-#define QUCIRCUIT_TYPE_FUNC_MCU 6
-#define QUCIRCUIT_TYPE_FUNC_MCMU 7
+#define QUCIRCUIT_TYPE_FUNC_MU 6
+#define QUCIRCUIT_TYPE_FUNC_MCU 7
+#define QUCIRCUIT_TYPE_FUNC_MCMU 8
 
 typedef struct qucircuit qucircuit;
 typedef struct qucircuit_application qucircuit_application;
@@ -32,6 +33,9 @@ struct qucircuit {
         };
         struct {
             qugate_func_cu func_cu;
+        };
+        struct {
+            qugate_func_mu func_mu;
         };
         struct {
             int n_controls;
@@ -99,6 +103,16 @@ void qucircuit_init_func_u(qucircuit *circuit, char *name, qugate_func_u func_u)
  * @param func_cu The qugate function to apply to the single control and target qubits.
  */
 void qucircuit_init_func_cu(qucircuit *circuit, char *name, qugate_func_cu func_cu);
+
+/**
+ * @brief Initializes a qucircuit that applies a qugate function with multiple target qubits.
+ * 
+ * @param circuit The qucircuit to intialize.
+ * @param name The name to give the qucircuit.
+ * @param n_targets The number of target qubits.
+ * @param func_mu The qugate function to apply to the multiple target qubits.
+ */
+void qucircuit_init_func_mu(qucircuit *circuit, char *name, int n_targets, qugate_func_mu func_mu);
 
 /**
  * @brief Initializes a qucircuit that applies a qugate function with multiple control qubits and a single target qubit.

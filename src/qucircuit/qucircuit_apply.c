@@ -6,6 +6,7 @@ void qucircuit_apply_4x4(qubits *qs, qucircuit_context qcc, qucircuit *qc);
 void qucircuit_apply_parent(qubits *qs, qucircuit_context qcc, qucircuit *qc);
 void qucircuit_apply_func_u(qubits *qs, qucircuit_context qcc, qucircuit *qc);
 void qucircuit_apply_func_cu(qubits *qs, qucircuit_context qcc, qucircuit *qc);
+void qucircuit_apply_func_mu(qubits *qs, qucircuit_context qcc, qucircuit *qc);
 void qucircuit_apply_func_mcu(qubits *qs, qucircuit_context qcc, qucircuit *qc);
 void qucircuit_apply_func_mcmu(qubits *qs, qucircuit_context qcc, qucircuit *qc);
 
@@ -32,6 +33,10 @@ void qucircuit_apply(qubits *qs, qucircuit_context qcc, qucircuit_application *a
         }
         case QUCIRCUIT_TYPE_FUNC_CU: {
             qucircuit_apply_func_cu(qs, qccn, application->circuit);
+            break;
+        }
+        case QUCIRCUIT_TYPE_FUNC_MU: {
+            qucircuit_apply_func_mu(qs, qccn, application->circuit);
             break;
         }
         case QUCIRCUIT_TYPE_FUNC_MCU: {
@@ -71,6 +76,10 @@ void qucircuit_apply_func_cu(qubits *qs, qucircuit_context qcc, qucircuit *qc) {
     int q_c = qcc.input_to_qubit_stack[0];
     int q_t = qcc.input_to_qubit_stack[1];
     qc->func_cu(qs, q_c, q_t);
+}
+
+void qucircuit_apply_func_mu(qubits *qs, qucircuit_context qcc, qucircuit *qc) {
+    qc->func_mu(qs, qc->n_inputs, qcc.input_to_qubit_stack);
 }
 
 void qucircuit_apply_func_mcu(qubits *qs, qucircuit_context qcc, qucircuit *qc) {

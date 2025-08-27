@@ -1,5 +1,9 @@
 #include "../qubits/qubits.h"
 
+//
+// 'qugate_func.h' type definitions
+//
+
 /**
  * @brief A function type for qugates with one target.
  * 
@@ -16,6 +20,15 @@ typedef void (*qugate_func_u)(qubits *qs, int q);
  * @param qt The target qubit.
  */
 typedef void (*qugate_func_cu)(qubits *qs, int qc, int qt);
+
+/**
+ * @brief A function type for qugates with multiple target qubits
+ * 
+ * @param qs The qubits for the function to act upon.
+ * @param qc The number of target qubits.
+ * @param qt The array of inputs (length 'n_targets').
+ */
+typedef void (*qugate_func_mu)(qubits *qs, int n_targets, int *inputs);
 
 /**
  * @brief A function type for qugates with multiple control qubits and one target qubit.
@@ -35,6 +48,12 @@ typedef void (*qugate_func_mcu)(qubits *qs, int n_controls, int *inputs);
  * @param inputs The array of inputs (length 'n_controls=n_targets'). The first 'n_controls' inputs are the controls, and the next 'n_targets' inputs are the targets.
  */
 typedef void (*qugate_func_mcmu)(qubits *qs, int n_controls, int n_targets, int *inputs);
+
+//
+// 'qugate_func.h' function definitions
+//
+
+/* qugate_func_u */
 
 /**
  * @brief A function that applies the 'Pauli X' gate.
@@ -59,6 +78,16 @@ void qugate_func_y(qubits *qs, int q);
  * @param q The target qubit.
  */
 void qugate_func_z(qubits *qs, int q);
+
+/**
+ * @brief A function that applies the 'Hadamard' gate.
+ * 
+ * @param qs The qubits for the function to act upon.
+ * @param q The target qubit.
+ */
+void qugate_func_h(qubits *qs, int q);
+
+/* qugate_func_cu */
 
 /**
  * @brief A function that applies the 'Controlled X' gate. AKA 'Controlled Not'. Applies the 'X' gate to the target qubit if the control qubit is 1.
@@ -87,6 +116,14 @@ void qugate_func_cy(qubits *qs, int qc, int qt);
  */
 void qugate_func_cz(qubits *qs, int qc, int qt);
 
+/**
+ * @brief A function that applies the 'Controlled Hadamard' gate. Applies the 'Hadamard' gate to the target qubit if the control qubit is 1.
+ * 
+ * @param qs The qubits for the function to act upon.
+ * @param qc The control qubit.
+ * @param qt The target qubit.
+ */
+void qugate_func_ch(qubits *qs, int qc, int qt);
 
 /**
  * @brief A function that applies the 'Swap' gate.
@@ -96,6 +133,46 @@ void qugate_func_cz(qubits *qs, int qc, int qt);
  * @param qt The second qubit.
  */
 void qugate_func_swap(qubits *qs, int qc, int qt);
+
+/* qugate_func_mu */
+
+/**
+ * @brief A function that applies the 'Pauli X' gate to multiple targets.
+ * 
+ * @param qs The qubits for the function to act upon.
+ * @param n_targets The number of target qubits.
+ * @param inputs The array of inputs (length 'n_targets').
+ */
+void qugate_func_mx(qubits *qs, int n_targets, int *inputs);
+
+/**
+ * @brief A function that applies the 'Pauli Y' gate to multiple targets.
+ * 
+ * @param qs The qubits for the function to act upon.
+ * @param n_targets The number of target qubits.
+ * @param inputs The array of inputs (length 'n_targets').
+ */
+void qugate_func_my(qubits *qs, int n_targets, int *inputs);
+
+/**
+ * @brief A function that applies the 'Pauli Z' gate to multiple targets.
+ * 
+ * @param qs The qubits for the function to act upon.
+ * @param n_targets The number of target qubits.
+ * @param inputs The array of inputs (length 'n_targets').
+ */
+void qugate_func_mz(qubits *qs, int n_targets, int *inputs);
+
+/**
+ * @brief A function that applies the 'Pauli X' gate to multiple targets.
+ * 
+ * @param qs The qubits for the function to act upon.
+ * @param n_targets The number of target qubits.
+ * @param inputs The array of inputs (length 'n_targets').
+ */
+void qugate_func_mh(qubits *qs, int n_targets, int *inputs);
+
+/* qugate_func_mcu */
 
 /**
  * @brief A function that applies the 'Multi-Controlled X' Gate. Applies the 'X' gate to the target qubit only if all control qubits are 1.
@@ -123,3 +200,14 @@ void qugate_func_mcy(qubits *qs, int n_controls, int *inputs);
  * @param inputs The array of inputs (length 'n_controls+1'). The first 'n_controls' inputs are the controls, the last input is the target.
  */
 void qugate_func_mcz(qubits *qs, int n_controls, int *inputs);
+
+/**
+ * @brief A function that applies the 'Multi-Controlled H Gate. Applies the 'H' gate to the target qubit only if all control qubits are 1.
+ * 
+ * @param qs The qubits for the function to act upon.
+ * @param n_controls The number of control qubits.
+ * @param inputs The array of inputs (length 'n_controls+1'). The first 'n_controls' inputs are the controls, the last input is the target.
+ */
+void qugate_func_mch(qubits *qs, int n_controls, int *inputs);
+
+/* qugate_func_mcmu */

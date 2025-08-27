@@ -36,6 +36,13 @@ void qucircuit_init_func_cu(qucircuit *circuit, char *name, qugate_func_cu func_
     circuit->func_cu = func_cu;
 }
 
+void qucircuit_init_func_mu(qucircuit *circuit, char *name, int n_targets, qugate_func_mu func_mu) {
+    circuit->type = QUCIRCUIT_TYPE_FUNC_MU;
+    circuit->n_inputs = n_targets;
+    circuit->name = name;
+    circuit->func_mu = func_mu;
+}
+
 void qucircuit_init_func_mcu(qucircuit *circuit, char *name, int n_controls, qugate_func_mcu func_mcu) {
     circuit->type = QUCIRCUIT_TYPE_FUNC_MCU;
     circuit->n_inputs = n_controls + 1;

@@ -1,3 +1,4 @@
+#define _USE_MATH_DEFINES
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -54,7 +55,7 @@ void qugate_mat_error(xiy *mat_4x4) {
 
 // TODO(): Make qugate test more robust
 int main(int argc, char *argv[]) {
-    xiy inv_sqrt2 = xiy_mul_s(xiy_one, 1/sqrt(2));
+    xiy inv_sqrt2 = xiy_mul_s(xiy_one, M_SQRT1_2);
     xiy mat_i[4] = { xiy_one, xiy_zero, xiy_zero, xiy_one };
     xiy mat_x[4] = { xiy_zero, xiy_one, xiy_one, xiy_zero };
     xiy mat_y[4] = { xiy_zero, xiy_mul_s(xiy_i, -1), xiy_i, xiy_zero };
