@@ -1,2 +1,3 @@
-target_sources(c_quantum_computer_simulation PRIVATE qugate.c)
+target_sources(c_quantum_computer_simulation PRIVATE qugate_func.c)
+target_sources(c_quantum_computer_simulation PRIVATE qugate_mat.c)
 target_include_directories(c_quantum_computer_simulation PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

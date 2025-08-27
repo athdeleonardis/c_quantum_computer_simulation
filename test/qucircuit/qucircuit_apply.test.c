@@ -1,6 +1,6 @@
 #include <math.h>
 #include "../../src/qucircuit/qucircuit_apply.h"
-#include "../../src/qugate/qugate.h"
+#include "../../src/qugate/qugate_mat.h"
 #include "../../src/qubits/qubits_apply.h"
 
 #define EPSILON 1e-9
@@ -57,19 +57,19 @@ int main(int argc, char *argv) {
     qucircuit_context qcc = qucircuit_context_init(N_QUBITS, qcc_space);
 
     xiy mat_x[4];
-    qugate_x(mat_x);
+    qugate_mat_x(mat_x);
     qucircuit qc_x;
     qucircuit_init_2x2(&qc_x, "X", mat_x);
     qucircuit_application qca_x = { .circuit=&qc_x, .target_qubits=inputs };
 
     xiy mat_z[4];
-    qugate_z(mat_z);
+    qugate_mat_z(mat_z);
     qucircuit qc_z;
     qucircuit_init_2x2(&qc_z, "Z", mat_z);
     qucircuit_application qca_z = { .circuit=&qc_z, .target_qubits=inputs };
 
     xiy mat_cx[16];
-    qugate_cx(mat_cx);
+    qugate_mat_cx(mat_cx);
     qucircuit qc_cx;
     qucircuit_init_4x4(&qc_cx, "CX", mat_cx);
 

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../src/qugate/qugate.h"
+#include "../../src/qugate/qugate_mat.h"
 
 #define N_TESTS_2X2 5
 #define N_TESTS_4X4 3
@@ -40,13 +40,13 @@ typedef struct test {
     xiy *output;
 } test_t;
 
-void _qugate_ch(xiy *mat_4x4) {
+void _qugate_mat_ch(xiy *mat_4x4) {
     xiy mat_h[4];
-    qugate_h(mat_h);
-    qugate_cu(mat_4x4, mat_h);
+    qugate_mat_h(mat_h);
+    qugate_mat_cu(mat_4x4, mat_h);
 }
 
-void qugate_error(xiy *mat_4x4) {
+void qugate_mat_error(xiy *mat_4x4) {
     for (int i = 0; i < 16; i++) {
         mat_4x4[i] = xiy_mul_s(xiy_one, ERROR_VALUE);
     }
@@ -80,11 +80,11 @@ int main(int argc, char *argv[]) {
         xiy_zero, xiy_zero, inv_sqrt2, xiy_mul_s(inv_sqrt2, -1)
     };
 
-    test_t test_i = { qugate_i, mat_i };
-    test_t test_x = { qugate_x, mat_x };
-    test_t test_y = { qugate_y, mat_y };
-    test_t test_z = { qugate_z, mat_z };
-    test_t test_h = { qugate_h, mat_h };
+    test_t test_i = { qugate_mat_i, mat_i };
+    test_t test_x = { qugate_mat_x, mat_x };
+    test_t test_y = { qugate_mat_y, mat_y };
+    test_t test_z = { qugate_mat_z, mat_z };
+    test_t test_h = { qugate_mat_h, mat_h };
     test_t test_2x2s[N_TESTS_2X2] = {
         test_i,
         test_x,
@@ -93,9 +93,9 @@ int main(int argc, char *argv[]) {
         test_h
     };
 
-    test_t test_cx = { qugate_cx, mat_cx };
-    test_t test_cz = { qugate_cz, mat_cz };
-    test_t test_ch = { _qugate_ch, mat_ch };
+    test_t test_cx = { qugate_mat_cx, mat_cx };
+    test_t test_cz = { qugate_mat_cz, mat_cz };
+    test_t test_ch = { _qugate_mat_ch, mat_ch };
     test_t test_4x4s[N_TESTS_4X4] = {
         test_cx,
         test_cz,
@@ -106,7 +106,7 @@ int main(int argc, char *argv[]) {
 
     for (int i = 0; i < N_TESTS_2X2; i++) {
         test_t test = test_2x2s[i];
-        qugate_error(mat_input);
+        qugate_mat_error(mat_input);
         test.func(mat_input);
         for (int j = 0; j < 4; j++) {
             if (!xiy_equals(mat_input[j], test.output[j])) {
@@ -121,7 +121,7 @@ int main(int argc, char *argv[]) {
 
     for (int i = 0; i < N_TESTS_4X4; i++) {
         test_t test = test_4x4s[i];
-        qugate_error(mat_input);
+        qugate_mat_error(mat_input);
         test.func(mat_input);
         for (int j = 0; j < 16; j++) {
             if (!xiy_equals(mat_input[j], test.output[j])) {
