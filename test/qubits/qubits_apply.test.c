@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../../src/qubits/qubits_apply.h"
-#include "../../src/qugate/qugate.h"
+#include "../../src/qugate/qugate_mat.h"
 
 #define EPSILON 1e-9
 #define N_QUBITS 3
@@ -74,20 +74,20 @@ int main(int argc, char *argv[]) {
     xiy mat_empty_2x2[4] = { xiy_zero, xiy_zero, xiy_zero, xiy_zero };
 
     xiy mat_i[4];
-    qugate_i(mat_i);
+    qugate_mat_i(mat_i);
     xiy mat_x[4];
-    qugate_x(mat_x);
+    qugate_mat_x(mat_x);
     xiy mat_y[4];
-    qugate_y(mat_y);
+    qugate_mat_y(mat_y);
     xiy mat_z[4];
-    qugate_z(mat_z);
+    qugate_mat_z(mat_z);
     xiy mat_h[4];
-    qugate_h(mat_h);
+    qugate_mat_h(mat_h);
 
     xiy mat_cx[16];
-    qugate_cx(mat_cx);
+    qugate_mat_cx(mat_cx);
     xiy mat_cz[16];
-    qugate_cz(mat_cz);
+    qugate_mat_cz(mat_cz);
     
     qubits qs;
     xiy space[2*N_VALUES];
