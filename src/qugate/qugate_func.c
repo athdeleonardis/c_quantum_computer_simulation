@@ -69,7 +69,7 @@ void qugate_func_h(qubits *qs, int q) {
     for (int s = 0; s < n_values; s++) {
         // If q=1, take (0)-(1), if q=0, take (0)+(1)
         xiy v0 = qs->values_in[s & q_set_0];
-        xiy v1 = xiy_mul_s(qs->values_in[s | q_set_1], -!!(s & q_set_1));
+        xiy v1 = xiy_mul_s(qs->values_in[s | q_set_1], 1 - 2 * !!(s & q_set_1));
         qs->values_out[s] = xiy_mul_s(xiy_add(v0, v1), M_SQRT1_2);
     }
 
@@ -123,6 +123,26 @@ void qugate_func_cz(qubits *qs, int qc, int qt) {
             qs->values_in[s] = xiy_mul_s(qs->values_in[s], -1);
         }
     }
+}
+
+void qugate_func_ch(qubits *qs, int qc, int qt) {
+    int qc_set_1 = 1 << qc;
+    int qt_set_1 = 1 << qt;
+    int qt_set_0 = ~qt_set_1;
+
+    int n_values = qs->n_values;
+    for (int s = 0; s < n_values; s++) {
+        if (s & qc_set_1) {
+            // See 'qugate_func_h' for similar code but with more comments
+            xiy v0 = qs->values_in[s & qt_set_0];
+            xiy v1 = xiy_mul_s(qs->values_in[s | qt_set_1], 1 - 2 * !!(s & qt_set_1));
+            qs->values_out[s] = xiy_mul_s(xiy_add(v0, v1), M_SQRT1_2);
+            continue;
+        }
+        qs->values_out[s] = qs->values_in[s];
+    }
+
+    qubits_swap_in_out(qs);
 }
 
 void qugate_func_swap(qubits *qs, int qc, int qt) {
@@ -279,7 +299,7 @@ void qugate_func_mch(qubits *qs, int n_controls, int *inputs) {
         if (s & selector == selector) {
             // See 'qugate_func_h' for similar code but with more comments
             xiy v0 = qs->values_in[s & qt_set_0];
-            xiy v1 = xiy_mul_s(qs->values_in[s | qt_set_1], -!!(s & qt_set_1));
+            xiy v1 = xiy_mul_s(qs->values_in[s | qt_set_1], 1 - 2 * !!(s & qt_set_1));
             qs->values_out[s] = xiy_mul_s(xiy_add(v0, v1), M_SQRT1_2);
             continue;
         }
