@@ -119,7 +119,7 @@ void qugate_func_cz(qubits *qs, int qc, int qt) {
 
     int n_values = qs->n_values;
     for (int s = 0; s < n_values; s++) {
-        if (s & selector == selector) {
+        if ((s & selector) == selector) {
             qs->values_in[s] = xiy_mul_s(qs->values_in[s], -1);
         }
     }
@@ -239,7 +239,7 @@ void qugate_func_mcx(qubits *qs, int n_controls, int *inputs) {
 
     int n_values = qs->n_values;
     for (int s = 0; s < n_values; s++) {
-        if (s & selector == selector) {
+        if ((s & selector) == selector) {
             qs->values_out[s] = qs->values_in[s ^ qt_set_1];
             continue;
         }
@@ -258,7 +258,7 @@ void qugate_func_mcy(qubits *qs, int n_controls, int *inputs) {
 
     int n_values = qs->n_values;
     for (int s = 0; s < n_values; s++) {
-        if (s & selector == selector) {
+        if ((s & selector) == selector) {
             if (s & qt_set_1) {
                 qs->values_out[s] = xiy_mul(xiy_i, qs->values_in[s ^ qt_set_1]);
                 continue;
@@ -280,7 +280,7 @@ void qugate_func_mcz(qubits *qs, int n_controls, int *inputs) {
 
     int n_values = qs->n_values;
     for (int s = 0; s < n_values; s++) {
-        if (s & selector == selector) {
+        if ((s & selector) == selector) {
             qs->values_in[s] = xiy_mul_s(qs->values_in[s], -1);
         }
     }
@@ -296,7 +296,7 @@ void qugate_func_mch(qubits *qs, int n_controls, int *inputs) {
 
     int n_values = qs->n_values;
     for (int s = 0; s < n_values; s++) {
-        if (s & selector == selector) {
+        if ((s & selector) == selector) {
             // See 'qugate_func_h' for similar code but with more comments
             xiy v0 = qs->values_in[s & qt_set_0];
             xiy v1 = xiy_mul_s(qs->values_in[s | qt_set_1], 1 - 2 * !!(s & qt_set_1));
