@@ -1,1 +1,2 @@
 add_subdirectory(grovers_algorithm)
+add_subdirectory(phase_estimation)

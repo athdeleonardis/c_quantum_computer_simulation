@@ -1,0 +1,2 @@
+add_executable(phase_estimation.app main.c)
+target_link_libraries(phase_estimation.app PRIVATE c_quantum_computer_simulation)
