@@ -228,6 +228,24 @@ void qugate_func_mh(qubits *qs, int n_targets, int *inputs) {
     }
 }
 
+void qugate_func_fourier_transform(qubits *qs, int n_targets, int *inputs) {
+    for (int i = 0; i < n_targets; i++) {
+        qugate_func_h(qs, inputs[i]);
+        for (int j = i + 1; j < n_targets; j++) {
+            qugate_func_cp(qs, inputs[j], inputs[i],  2.0 * M_PI / (1 << (j - i)));
+        }
+    }
+}
+
+void qugate_func_fourier_transform_inverse(qubits *qs, int n_targets, int *inputs) {
+    for (int i = n_targets-1; i > -1; i--) {
+        for (int j = i + 1; j < n_targets; j++) {
+            qugate_func_cp(qs, inputs[j], inputs[i], -2.0 * M_PI / (1 << (j - i)));
+        }
+        qugate_func_h(qs, inputs[i]);
+    }
+}
+
 /* qugate_func_mcu */
 
 void qugate_func_mcx(qubits *qs, int n_controls, int *inputs) {
@@ -311,8 +329,21 @@ void qugate_func_mch(qubits *qs, int n_controls, int *inputs) {
 
 /* qugate_func_mcmu */
 
+/* Don't fit a function type */
+
+void qugate_func_cp(qubits *qs, int qc, int qt, double angle) {
+    int selector = (1 << qc) | (1 << qt);
+
+    int n_values = qs->n_values;
+    for (int s = 0; s < n_values; s++) {
+        if ((s & selector) == selector) {
+            qs->values_in[s] = xiy_mul(xiy_from_angle(angle), qs->values_in[s]);
+        }
+    }
+}
+
 //
-// 'qugate_func.h' function implementations
+// 'qugate_func.c' function implementations
 //
 
 int _qugate_func_count_bits(int n) {

@@ -172,6 +172,25 @@ void qugate_func_mz(qubits *qs, int n_targets, int *inputs);
  */
 void qugate_func_mh(qubits *qs, int n_targets, int *inputs);
 
+/**
+ * @brief A function that applies the 'Quantum Fourier Transform' to multiple targets.
+ * 
+ * @param qs The qubits for the function to act upon.
+ * @param n_targets The number of target qubits.
+ * @param inputs The array of inputs (length 'n_targets').
+ */
+void qugate_func_fourier_transform(qubits *qs, int n_targets, int *inputs);
+
+
+/**
+ * @brief A function that applies the 'Inverse Quantum Fourier Transform' to multiple targets.
+ * 
+ * @param qs The qubits for the function to act upon.
+ * @param n_targets The number of target qubits.
+ * @param inputs The array of inputs (length 'n_targets').
+ */
+void qugate_func_fourier_transform_inverse(qubits *qs, int n_targets, int *inputs);
+
 /* qugate_func_mcu */
 
 /**
@@ -211,3 +230,15 @@ void qugate_func_mcz(qubits *qs, int n_controls, int *inputs);
 void qugate_func_mch(qubits *qs, int n_controls, int *inputs);
 
 /* qugate_func_mcmu */
+
+/* Don't fit a function type */
+
+/**
+ * @brief A function that applies the 'Controlled Phase' Gate. Applies a phase only if both the control and target qubits are 1.
+ * 
+ * @param qs The qubits for the function to act upon.
+ * @param qc The control qubit.
+ * @param qt The target qubit.
+ * @param angle The angle of the phase.
+ */
+void qugate_func_cp(qubits *qs, int qc, int qt, double angle);
